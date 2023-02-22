@@ -8,7 +8,7 @@ export default new Router({
     {
       path: "/",
       redirect: "/dashboard",
-      //   component: () => import("@/view/layout/Layout"),
+      component: () => import("@/view/layout/Layout"),
       children: [
         {
           path: "/dashboard",

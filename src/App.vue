@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <router-view></router-view>
 </template>
 
+<style lang="scss">
+@import "~bootstrap-vue/dist/bootstrap-vue.css";
+// @import "~perfect-scrollbar/css/perfect-scrollbar.css";
+@import "~socicon/css/socicon.css";
+@import "~animate.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~line-awesome/dist/line-awesome/css/line-awesome.css";
+// @import "assets/plugins/flaticon/flaticon.css";
+// @import "assets/plugins/flaticon2/flaticon.css";
+// @import "assets/plugins/keenthemes-icons/font/ki.css";
+@import "assets/sass/style.vue";
+</style>
+
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { OVERRIDE_LAYOUT_CONFIG } from "@/core/services/store/config.module";
 
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
+  name: "admin-vue",
+  mounted() {
+    /**
+     * this is to override the layout config using saved data from localStorage
+     * remove this to use config only from static json (@/core/config/layout.config.json)
+     */
+    this.$store.dispatch(OVERRIDE_LAYOUT_CONFIG);
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
