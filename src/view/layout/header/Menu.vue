@@ -19,7 +19,7 @@
       </li>
     </router-link>
 
-    <router-link
+    <!-- <router-link
       to="/builder"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
@@ -36,9 +36,9 @@
           <span class="menu-text"> Builder </span>
         </a>
       </li>
-    </router-link>
+    </router-link> -->
 
-    <li
+    <!-- <li
       aria-haspopup="true"
       data-menu-toggle="click"
       class="menu-item menu-item-submenu menu-item-open-dropdown"
@@ -795,8 +795,8 @@
           </ul>
         </div>
       </div>
-    </li>
-    <li
+    </li> -->
+    <!-- <li
       aria-haspopup="true"
       data-menu-toggle="click"
       class="menu-item menu-item-submenu menu-item-open-dropdown"
@@ -1242,8 +1242,8 @@
           </ul>
         </div>
       </div>
-    </li>
-    <li
+    </li> -->
+    <!-- <li
       aria-haspopup="true"
       data-menu-toggle="click"
       class="menu-item menu-item-submenu menu-item-open-dropdown"
@@ -1639,7 +1639,7 @@
           </li>
         </ul>
       </div>
-    </li>
+    </li> -->
   </ul>
 </template>
 

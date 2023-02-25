@@ -13,7 +13,7 @@ export default new Router({
         {
           path: "/dashboard",
           name: "dashboard",
-          //   component: () => import("@/view/pages/Dashboard.vue"),
+          component: () => import("@/view/pages/Dashboard.vue"),
         },
         {
           path: "/builder",
@@ -60,12 +60,12 @@ export default new Router({
     },
     {
       path: "/",
-      //   component: () => import("@/view/pages/auth/login_pages/Login-1"),
+      component: () => import("@/view/pages/auth/login_pages/Login-1"),
       children: [
         {
           name: "login",
           path: "/login",
-          //   component: () => import("@/view/pages/auth/login_pages/Login-1"),
+          component: () => import("@/view/pages/auth/login_pages/Login-1"),
         },
         {
           name: "register",

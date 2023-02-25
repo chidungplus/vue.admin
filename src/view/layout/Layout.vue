@@ -49,7 +49,7 @@
         <FooterComponent></FooterComponent>
       </div>
     </div>
-    <StickyToolbarComponent v-if="toolbarDisplay"></StickyToolbarComponent>
+    <!-- <StickyToolbarComponent v-if="toolbarDisplay"></StickyToolbarComponent> -->
     <ScrollTopComponent></ScrollTopComponent>
   </div>
 </template>
@@ -62,7 +62,7 @@ import HeaderMobileComponent from "@/view/layout/header/HeaderMobile.vue";
 import FooterComponent from "@/view/layout/footer/Footer.vue";
 import HtmlClass from "@/core/services/htmlclass.service";
 // import SubheaderComponent from "@/view/layout/subheader/Subheader.vue";
-import StickyToolbarComponent from "@/view/layout/extras/StickyToolbar.vue";
+// import StickyToolbarComponent from "@/view/layout/extras/StickyToolbar.vue";
 import ScrollTopComponent from "@/view/layout/extras/ScrollTop";
 // <!-- import Loader from "@/view/content/Loader.vue"; -->
 import {
@@ -78,7 +78,7 @@ export default {
     HeaderMobileComponent,
     FooterComponent,
     // SubheaderComponent,
-    StickyToolbarComponent,
+    // StickyToolbarComponent,
     ScrollTopComponent,
     // Loader,
   },

@@ -8,7 +8,7 @@
     @mouseleave="mouseLeave"
   >
     <!-- begin:: Aside -->
-    <KTBrand></KTBrand>
+    <BrandComponent></BrandComponent>
     <!-- end:: Aside -->
 
     <!-- begin:: Aside Menu -->
@@ -29,7 +29,7 @@
           class="aside-menu scroll"
           style="max-height: 90vh; position: relative"
         >
-          <KTMenu></KTMenu>
+          <MenuComponent></MenuComponent>
         </perfect-scrollbar>
       </div>
     </div>
@@ -39,11 +39,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import KTBrand from "@/view/layout/brand/Brand.vue";
+import BrandComponent from "@/view/layout/brand/Brand.vue";
 
-import KTLayoutAside from "@/assets/js/layout/base/aside.js";
-import KTLayoutAsideMenu from "@/assets/js/layout/base/aside-menu.js";
-import KTMenu from "@/view/layout/aside/Menu.vue";
+import LayoutAside from "@/assets/js/layout/base/aside.js";
+import LayoutAsideMenu from "@/assets/js/layout/base/aside-menu.js";
+import MenuComponent from "@/view/layout/aside/Menu.vue";
 
 export default {
   name: "KTAside",
@@ -54,16 +54,16 @@ export default {
     };
   },
   components: {
-    KTBrand,
-    KTMenu,
+    BrandComponent,
+    MenuComponent,
   },
   mounted() {
     this.$nextTick(() => {
       // Init Aside
-      KTLayoutAside.init(this.$refs["kt_aside"]);
+      LayoutAside.init(this.$refs["kt_aside"]);
 
       // Init Aside Menu
-      KTLayoutAsideMenu.init(this.$refs["kt_aside_menu"]);
+      LayoutAsideMenu.init(this.$refs["kt_aside_menu"]);
     });
   },
   methods: {

@@ -37,13 +37,8 @@ ApiService.init();
 MockService.init();
 
 router.beforeEach((to, from, next) => {
-  // Ensure we checked auth before each page load.
   Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
-
-  // reset config to initial state
   store.dispatch(RESET_LAYOUT_CONFIG);
-
-  // Scroll page to top on every route change
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 100);

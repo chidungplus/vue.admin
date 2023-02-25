@@ -96,7 +96,7 @@
     <!--end: My Cart -->
 
     <!--begin: Quick panel toggle -->
-    <KTQuickPanel></KTQuickPanel>
+    <!-- <KTQuickPanel></KTQuickPanel> -->
     <!--end: Quick panel toggle -->
 
     <!--begin: Language bar -->
@@ -165,7 +165,7 @@ import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAc
 import KTDropdownMyCart from "@/view/layout/extras/dropdown/DropdownMyCart.vue";
 import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
 import KTQuickUser from "@/view/layout/extras/offcanvas/QuickUser.vue";
-import KTQuickPanel from "@/view/layout/extras/offcanvas/QuickPanel.vue";
+// import KTQuickPanel from "@/view/layout/extras/offcanvas/QuickPanel.vue";
 import i18nService from "@/core/services/i18n.service.js";
 
 export default {
@@ -183,7 +183,7 @@ export default {
     KTDropdownMyCart,
     KTDropdownLanguage,
     KTQuickUser,
-    KTQuickPanel,
+    // KTQuickPanel,
   },
   methods: {
     onLanguageChanged() {
