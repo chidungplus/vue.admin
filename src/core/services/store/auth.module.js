@@ -1,6 +1,6 @@
 import ApiService from "@/core/services/api.service";
 import JwtService from "@/core/services/jwt.service";
-
+import { ROUTES } from '@/core/config/routes/index.js';
 // action types
 export const VERIFY_AUTH = "verifyAuth";
 export const LOGIN = "login";
@@ -47,26 +47,26 @@ const actions = {
   },
   [REGISTER](context, credentials) {
     return new Promise((resolve) => {
-      ApiService.post("login", credentials)
+      ApiService.post(ROUTES.API.REGISTER, credentials)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
           resolve(data);
         })
         .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+            context.commit(SET_ERROR, response.data.errors);
         });
     });
   },
   [VERIFY_AUTH](context) {
     if (JwtService.getToken()) {
       ApiService.setHeader();
-      ApiService.get("verify")
-        .then(({ data }) => {
-          context.commit(SET_AUTH, data);
-        })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
-        });
+    //   ApiService.get("verify")
+    //     .then(({ data }) => {
+    //       context.commit(SET_AUTH, data);
+    //     })
+    //     .catch(({ response }) => {
+    //       context.commit(SET_ERROR, response.data.errors);
+    //     });
     } else {
       context.commit(PURGE_AUTH);
     }

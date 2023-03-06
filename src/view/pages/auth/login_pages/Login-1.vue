@@ -152,8 +152,8 @@
                   type="text"
                   placeholder="Fullname"
                   name="fullname"
-                  ref="fullname"
                   autocomplete="off"
+                  v-model="formData.name"
                 />
               </div>
               <div class="form-group">
@@ -162,7 +162,7 @@
                   type="email"
                   placeholder="Email"
                   name="email"
-                  ref="remail"
+                  v-model="formData.email"
                   autocomplete="off"
                 />
               </div>
@@ -172,7 +172,7 @@
                   type="password"
                   placeholder="Password"
                   name="password"
-                  ref="rpassword"
+                  v-model="formData.password"
                   autocomplete="off"
                 />
               </div>
@@ -199,6 +199,8 @@
                   ref="kt_login_signup_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                   style="width: 150px"
+                  type="button"
+                  @click="register"
                 >
                   Submit
                 </button>
@@ -285,7 +287,7 @@
 import KTUtil from "@/assets/js/components/util";
 import { mapGetters, mapState } from "vuex";
 // import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
-import { LOGIN } from "@/core/services/store/auth.module";
+import { REGISTER } from "@/core/services/store/auth.module";
 // import Swal from "sweetalert2";
 
 export default {
@@ -298,6 +300,11 @@ export default {
         email: "admin@demo.com",
         password: "demo",
       },
+      formData: {
+          name: "",
+          email: "",
+          password: ""
+      }
     };
   },
   computed: {
@@ -416,31 +423,30 @@ export default {
     // });
 
     // this.fv.on("core.form.valid", () => {
-    var email = this.form.email;
-    var password = this.form.password;
+    // var email = this.form.email;
+    // var password = this.form.password;
 
     //   // clear existing errors
     //   this.$store.dispatch(LOGOUT);
 
     //   // set spinner to submit button
-    const submitButton = this.$refs["kt_login_signin_submit"];
-    submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+    // const submitButton = this.$refs["kt_login_signin_submit"];
+    // submitButton.classList.add("spinner", "spinner-light", "spinner-right");
 
-    //   // dummy delay
-    setTimeout(() => {
-      // send login request
-      this.$store
-        .dispatch(LOGIN, { email, password })
-        // go to which page after successfully login
-        .then(() => this.$router.push({ name: "dashboard" }))
-        .catch(() => {});
+    // setTimeout(() => {
+    //   this.$store
+    //     .dispatch(LOGIN, { email, password })
+    //     .then((data) => {
+    //         console.log(12345);
+    //     })
+    //     .catch(() => {});
 
-      submitButton.classList.remove(
-        "spinner",
-        "spinner-light",
-        "spinner-right"
-      );
-    }, 2000);
+    //   submitButton.classList.remove(
+    //     "spinner",
+    //     "spinner-light",
+    //     "spinner-right"
+    //   );
+    // }, 2000);
     // });
 
     // this.fv.on("core.form.invalid", () => {
@@ -457,29 +463,25 @@ export default {
     //   const email = this.$refs.remail.value;
     //   const password = this.$refs.rpassword.value;
 
-    //   // clear existing errors
-    //   this.$store.dispatch(LOGOUT);
+    // //   this.$store.dispatch(LOGOUT);
 
-    //   // set spinner to submit button
     //   const submitButton = this.$refs["kt_login_signup_submit"];
     //   submitButton.classList.add("spinner", "spinner-light", "spinner-right");
 
-    //   // dummy delay
-    //   setTimeout(() => {
-    //     // send register request
     //     this.$store
     //       .dispatch(REGISTER, {
     //         email: email,
     //         password: password,
     //       })
-    //       .then(() => this.$router.push({ name: "dashboard" }));
-
+    //       .then((data) => {
+    //           console.log(data);
+    //         //    this.$router.push({ name: "dashboard" })
+    //       });
     //     submitButton.classList.remove(
     //       "spinner",
     //       "spinner-light",
     //       "spinner-right"
     //     );
-    //   }, 2000);
     // });
 
     // this.fv1.on("core.form.invalid", () => {
@@ -501,6 +503,28 @@ export default {
         "animate__animated animate__backInUp"
       );
     },
+    register() {
+        // const email = this.$refs.remail.value;
+        // const password = this.$refs.rpassword.value;
+
+    //   this.$store.dispatch(LOGOUT);
+
+        const submitButton = this.$refs["kt_login_signup_submit"];
+        submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+
+        this.$store
+          .dispatch(REGISTER, {
+            ...this.formData
+          })
+          .then(() => {
+               this.$router.push({ name: "dashboard" })
+          });
+        submitButton.classList.remove(
+          "spinner",
+          "spinner-light",
+          "spinner-right"
+        );
+    }
   },
 };
 </script>

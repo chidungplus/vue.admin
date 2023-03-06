@@ -175,11 +175,11 @@ export default {
      */
     hasSingleCodeType() {
       let exist = 0;
-        ["html", "js", "scss"].forEach((type) => {
-            if (this.$slots.hasOwnProperty(type)) {
-                exist++;
-            }
-        });
+      ["html", "js", "scss"].forEach((type) => {
+        if (this.$slots.hasOwnProperty(type)) {
+          exist++;
+        }
+      });
       return exist === 1;
     },
 
