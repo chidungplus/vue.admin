@@ -63,55 +63,31 @@
                   ></span
                 >
               </div>
-              <div class="form-group">
-                <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Email</label
-                >
-                <div
-                  id="example-input-group-1"
-                  label=""
-                  label-for="example-input-1"
-                >
-                  <input
-                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-                    type="text"
+                <input-component
                     name="email"
-                    ref="email"
-                    v-model="form.email"
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="d-flex justify-content-between mt-n5">
-                  <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-                    >Password</label
-                  >
-                  <a
+                    v-model="formData.email"
+                    label="Email"  
+                    :error="errors"  
+                />
+                <input-component
+                    type="password"
+                    name="password"
+                    v-model="formData.password"
+                    label="password"
+                    :error="errors"
+                />
+                <a
                     class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
                     id="kt_login_forgot"
                     @click="showForm('forgot')"
                     >Forgot Password ?</a
-                  >
-                </div>
-                <div
-                  id="example-input-group-2"
-                  label=""
-                  label-for="example-input-2"
                 >
-                  <input
-                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-                    type="password"
-                    name="password"
-                    ref="password"
-                    v-model="form.password"
-                    autocomplete="off"
-                  />
-                </div>
-              </div>
               <div class="pb-lg-0 pb-5">
                 <button
                   ref="kt_login_signin_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3"
+                  @click="login"
+                  type="button"
                 >
                   Sign In
                 </button>
@@ -146,46 +122,25 @@
                   Enter your details to create your account
                 </p>
               </div>
-              <div class="form-group">
-                <input
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="text"
-                  placeholder="Fullname"
-                  name="fullname"
-                  autocomplete="off"
-                  v-model="formData.name"
+                <input-component
+                    name="name"
+                    v-model="formData.name"
+                    placeholder="Full name"
+                    :error="errors"
                 />
-              </div>
-              <div class="form-group">
-                <input
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  v-model="formData.email"
-                  autocomplete="off"
+                <input-component
+                    name="email"
+                    v-model="formData.email"
+                    placeholder="Email"
+                    :error="errors"
                 />
-              </div>
-              <div class="form-group">
-                <input
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  v-model="formData.password"
-                  autocomplete="off"
+                <input-component
+                    name="password"
+                    v-model="formData.password"
+                    placeholder="Password"
+                    :error="errors"
+                    type="password"
                 />
-              </div>
-              <div class="form-group">
-                <input
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="password"
-                  placeholder="Confirm password"
-                  name="cpassword"
-                  ref="cpassword"
-                  autocomplete="off"
-                />
-              </div>
               <div class="form-group">
                 <label class="checkbox mb-0">
                   <input type="checkbox" name="agree" />
@@ -287,7 +242,7 @@
 import KTUtil from "@/assets/js/components/util";
 import { mapGetters, mapState } from "vuex";
 // import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
-import { REGISTER } from "@/core/services/store/auth.module";
+import { REGISTER, LOGIN } from "@/core/services/store/auth.module";
 // import Swal from "sweetalert2";
 
 export default {
@@ -296,15 +251,15 @@ export default {
     return {
       state: "signin",
       // Remove this dummy login info
-      form: {
-        email: "admin@demo.com",
-        password: "demo",
-      },
+    //   form: {
+    //     email: "admin@demo.com",
+    //     password: "demo",
+    //   },
       formData: {
-          name: "",
-          email: "",
-          password: ""
-      }
+        name: "",
+        email: "",
+        password: "",
+      },
     };
   },
   computed: {
@@ -323,7 +278,6 @@ export default {
     // const signin_form = KTUtil.getById("kt_login_signin_form");
     // const signup_form = KTUtil.getById("kt_login_signup_form");
     // const forgot_form = KTUtil.getById("kt_login_forgot_form");
-
     // this.fv = formValidation(signin_form, {
     //   fields: {
     //     email: {
@@ -347,7 +301,6 @@ export default {
     //     bootstrap: new Bootstrap(),
     //   },
     // });
-
     // this.fv1 = formValidation(signup_form, {
     //   fields: {
     //     fullname: {
@@ -401,7 +354,6 @@ export default {
     //     bootstrap: new Bootstrap(),
     //   },
     // });
-
     // this.fv2 = formValidation(forgot_form, {
     //   fields: {
     //     email: {
@@ -421,34 +373,13 @@ export default {
     //     bootstrap: new Bootstrap(),
     //   },
     // });
-
     // this.fv.on("core.form.valid", () => {
     // var email = this.form.email;
     // var password = this.form.password;
-
     //   // clear existing errors
     //   this.$store.dispatch(LOGOUT);
-
     //   // set spinner to submit button
-    // const submitButton = this.$refs["kt_login_signin_submit"];
-    // submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-
-    // setTimeout(() => {
-    //   this.$store
-    //     .dispatch(LOGIN, { email, password })
-    //     .then((data) => {
-    //         console.log(12345);
-    //     })
-    //     .catch(() => {});
-
-    //   submitButton.classList.remove(
-    //     "spinner",
-    //     "spinner-light",
-    //     "spinner-right"
-    //   );
-    // }, 2000);
     // });
-
     // this.fv.on("core.form.invalid", () => {
     //   Swal.fire({
     //     title: "",
@@ -458,16 +389,12 @@ export default {
     //     heightAuto: false,
     //   });
     // });
-
     // this.fv1.on("core.form.valid", () => {
     //   const email = this.$refs.remail.value;
     //   const password = this.$refs.rpassword.value;
-
     // //   this.$store.dispatch(LOGOUT);
-
     //   const submitButton = this.$refs["kt_login_signup_submit"];
     //   submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-
     //     this.$store
     //       .dispatch(REGISTER, {
     //         email: email,
@@ -483,7 +410,6 @@ export default {
     //       "spinner-right"
     //     );
     // });
-
     // this.fv1.on("core.form.invalid", () => {
     //   Swal.fire({
     //     title: "",
@@ -504,25 +430,39 @@ export default {
       );
     },
     register() {
-        // const email = this.$refs.remail.value;
-        // const password = this.$refs.rpassword.value;
+      // const email = this.$refs.remail.value;
+      // const password = this.$refs.rpassword.value;
 
-    //   this.$store.dispatch(LOGOUT);
+      //   this.$store.dispatch(LOGOUT);
 
-        const submitButton = this.$refs["kt_login_signup_submit"];
+      const submitButton = this.$refs["kt_login_signup_submit"];
+      submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+
+      this.$store
+        .dispatch(REGISTER, {
+          ...this.formData,
+        })
+        .then(() => {
+          this.$router.push({ name: "dashboard" });
+        });
+      submitButton.classList.remove(
+        "spinner",
+        "spinner-light",
+        "spinner-right"
+      );
+    },
+    login() {
+        const submitButton = this.$refs["kt_login_signin_submit"];
         submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-
         this.$store
-          .dispatch(REGISTER, {
-            ...this.formData
-          })
-          .then(() => {
-               this.$router.push({ name: "dashboard" })
-          });
+            .dispatch(LOGIN, { ...this.formData })
+            .then(() => {
+                this.$router.push({ name: "dashboard" });
+            });
         submitButton.classList.remove(
-          "spinner",
-          "spinner-light",
-          "spinner-right"
+            "spinner",
+            "spinner-light",
+            "spinner-right"
         );
     }
   },

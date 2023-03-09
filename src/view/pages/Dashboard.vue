@@ -56,7 +56,7 @@ import StatsWidget12 from "@/view/content/widgets/stats/Widget12.vue";
 import StatsWidget13 from "@/view/content/widgets/stats/Widget13.vue";
 // import { ROUTES } from "@/core/config/routes/index.js";
 // import ApiService from "@/core/services/api.service.js";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "dashboard",
@@ -75,14 +75,13 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [{ title: "Dashboard" }]);
-
   },
   computed: {
     ...mapGetters(["currentUser"]),
   },
-//   created() {
-//       this.getUser();
-//   },
+  //   created() {
+  //       this.getUser();
+  //   },
   methods: {
     setActiveTab1(event) {
       this.tabIndex = this.setActiveTab(event);
@@ -110,13 +109,13 @@ export default {
       return parseInt(event.target.getAttribute("data-tab"));
     },
     async getUser() {
-        // try {
-        //     const { data } = await ApiService.get(ROUTES.API.USER_PROFILE);
-        //     console.log(data);
-        // } catch (error) {
-        //     console.log(error);
-        // }
-    }
+      // try {
+      //     const { data } = await ApiService.get(ROUTES.API.USER_PROFILE);
+      //     console.log(data);
+      // } catch (error) {
+      //     console.log(error);
+      // }
+    },
   },
 };
 </script>

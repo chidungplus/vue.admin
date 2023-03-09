@@ -29,6 +29,8 @@ import "@/core/plugins/treeselect";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/core/plugins/formvalidation";
+import InputComponent from "@/components/input/default.vue";
+Vue.component("input-component", InputComponent);
 
 // API service init
 ApiService.init();
@@ -38,7 +40,7 @@ ApiService.init();
 
 router.beforeEach((to, from, next) => {
   Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
-//   store.dispatch(RESET_LAYOUT_CONFIG);
+  //   store.dispatch(RESET_LAYOUT_CONFIG);
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 100);
