@@ -63,29 +63,29 @@
                   ></span
                 >
               </div>
-                <input-component
-                    name="email"
-                    v-model="formData.email"
-                    label="Email"  
-                    :error="errors"  
-                />
-                <input-component
-                    type="password"
-                    name="password"
-                    v-model="formData.password"
-                    label="password"
-                    :error="errors"
-                />
-                <a
-                    class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
-                    id="kt_login_forgot"
-                    @click="showForm('forgot')"
-                    >Forgot Password ?</a
-                >
+              <input-component
+                name="email"
+                v-model="formData.email"
+                label="Email"
+                :error="errors"
+              />
+              <input-component
+                type="password"
+                name="password"
+                v-model="formData.password"
+                label="Password"
+                :error="errors"
+              />
+              <a
+                class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
+                id="kt_login_forgot"
+                @click="showForm('forgot')"
+                >Forgot Password ?</a
+              >
               <div class="pb-lg-0 pb-5">
                 <button
                   ref="kt_login_signin_submit"
-                  class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3"
+                  :class="`btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3 ${loadingClass}`"
                   @click="login"
                   type="button"
                 >
@@ -122,25 +122,25 @@
                   Enter your details to create your account
                 </p>
               </div>
-                <input-component
-                    name="name"
-                    v-model="formData.name"
-                    placeholder="Full name"
-                    :error="errors"
-                />
-                <input-component
-                    name="email"
-                    v-model="formData.email"
-                    placeholder="Email"
-                    :error="errors"
-                />
-                <input-component
-                    name="password"
-                    v-model="formData.password"
-                    placeholder="Password"
-                    :error="errors"
-                    type="password"
-                />
+              <input-component
+                name="name"
+                v-model="formData.name"
+                placeholder="Full name"
+                :error="errors"
+              />
+              <input-component
+                name="email"
+                v-model="formData.email"
+                placeholder="Email"
+                :error="errors"
+              />
+              <input-component
+                name="password"
+                v-model="formData.password"
+                placeholder="Password"
+                :error="errors"
+                type="password"
+              />
               <div class="form-group">
                 <label class="checkbox mb-0">
                   <input type="checkbox" name="agree" />
@@ -152,7 +152,7 @@
               <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
                 <button
                   ref="kt_login_signup_submit"
-                  class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                  :class="`btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4 ${loadingClass}`"
                   style="width: 150px"
                   type="button"
                   @click="register"
@@ -243,18 +243,14 @@ import KTUtil from "@/assets/js/components/util";
 import { mapGetters, mapState } from "vuex";
 // import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
 import { REGISTER, LOGIN } from "@/core/services/store/auth.module";
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export default {
   name: "login-1",
   data() {
     return {
       state: "signin",
-      // Remove this dummy login info
-    //   form: {
-    //     email: "admin@demo.com",
-    //     password: "demo",
-    //   },
+      loadingClass: "",
       formData: {
         name: "",
         email: "",
@@ -274,152 +270,6 @@ export default {
       );
     },
   },
-  mounted() {
-    // const signin_form = KTUtil.getById("kt_login_signin_form");
-    // const signup_form = KTUtil.getById("kt_login_signup_form");
-    // const forgot_form = KTUtil.getById("kt_login_forgot_form");
-    // this.fv = formValidation(signin_form, {
-    //   fields: {
-    //     email: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Username is required",
-    //         },
-    //       },
-    //     },
-    //     password: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Password is required",
-    //         },
-    //       },
-    //     },
-    //   },
-    //   plugins: {
-    //     trigger: new Trigger(),
-    //     submitButton: new SubmitButton(),
-    //     bootstrap: new Bootstrap(),
-    //   },
-    // });
-    // this.fv1 = formValidation(signup_form, {
-    //   fields: {
-    //     fullname: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Full name is required",
-    //         },
-    //       },
-    //     },
-    //     email: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Email is required",
-    //         },
-    //         emailAddress: {
-    //           message: "The value is not a valid email address",
-    //         },
-    //       },
-    //     },
-    //     password: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Password is required",
-    //         },
-    //       },
-    //     },
-    //     cpassword: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Confirm password is required",
-    //         },
-    //         identical: {
-    //           compare: function () {
-    //             return signup_form.querySelector('[name="password"]').value;
-    //           },
-    //           message: "The password and its confirm are not the same",
-    //         },
-    //       },
-    //     },
-    //     agree: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "You should agree terms and conditions",
-    //         },
-    //       },
-    //     },
-    //   },
-    //   plugins: {
-    //     trigger: new Trigger(),
-    //     submitButton: new SubmitButton(),
-    //     bootstrap: new Bootstrap(),
-    //   },
-    // });
-    // this.fv2 = formValidation(forgot_form, {
-    //   fields: {
-    //     email: {
-    //       validators: {
-    //         notEmpty: {
-    //           message: "Email is required",
-    //         },
-    //         emailAddress: {
-    //           message: "The value is not a valid email address",
-    //         },
-    //       },
-    //     },
-    //   },
-    //   plugins: {
-    //     trigger: new Trigger(),
-    //     submitButton: new SubmitButton(),
-    //     bootstrap: new Bootstrap(),
-    //   },
-    // });
-    // this.fv.on("core.form.valid", () => {
-    // var email = this.form.email;
-    // var password = this.form.password;
-    //   // clear existing errors
-    //   this.$store.dispatch(LOGOUT);
-    //   // set spinner to submit button
-    // });
-    // this.fv.on("core.form.invalid", () => {
-    //   Swal.fire({
-    //     title: "",
-    //     text: "Please, provide correct data!",
-    //     icon: "error",
-    //     confirmButtonClass: "btn btn-secondary",
-    //     heightAuto: false,
-    //   });
-    // });
-    // this.fv1.on("core.form.valid", () => {
-    //   const email = this.$refs.remail.value;
-    //   const password = this.$refs.rpassword.value;
-    // //   this.$store.dispatch(LOGOUT);
-    //   const submitButton = this.$refs["kt_login_signup_submit"];
-    //   submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-    //     this.$store
-    //       .dispatch(REGISTER, {
-    //         email: email,
-    //         password: password,
-    //       })
-    //       .then((data) => {
-    //           console.log(data);
-    //         //    this.$router.push({ name: "dashboard" })
-    //       });
-    //     submitButton.classList.remove(
-    //       "spinner",
-    //       "spinner-light",
-    //       "spinner-right"
-    //     );
-    // });
-    // this.fv1.on("core.form.invalid", () => {
-    //   Swal.fire({
-    //     title: "",
-    //     text: "Please, provide correct data!",
-    //     icon: "error",
-    //     confirmButtonClass: "btn btn-secondary",
-    //     heightAuto: false,
-    //   });
-    // });
-  },
   methods: {
     showForm(form) {
       this.state = form;
@@ -430,41 +280,45 @@ export default {
       );
     },
     register() {
-      // const email = this.$refs.remail.value;
-      // const password = this.$refs.rpassword.value;
-
-      //   this.$store.dispatch(LOGOUT);
-
-      const submitButton = this.$refs["kt_login_signup_submit"];
-      submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-
+      this.loadingClass = "spinner spinner-light spinner-right";
       this.$store
         .dispatch(REGISTER, {
           ...this.formData,
         })
         .then(() => {
           this.$router.push({ name: "dashboard" });
-        });
-      submitButton.classList.remove(
-        "spinner",
-        "spinner-light",
-        "spinner-right"
-      );
-    },
-    login() {
-        const submitButton = this.$refs["kt_login_signin_submit"];
-        submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-        this.$store
-            .dispatch(LOGIN, { ...this.formData })
-            .then(() => {
-                this.$router.push({ name: "dashboard" });
+        })
+        .catch(() => {
+          this.loadingClass = "";
+          if (this.errors["message"]) {
+            Swal.fire({
+              title: "Error!",
+              text: this.errors["message"],
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
             });
-        submitButton.classList.remove(
-            "spinner",
-            "spinner-light",
-            "spinner-right"
-        );
-    }
+          }
+        });
+    },
+    async login() {
+      this.loadingClass = "spinner spinner-light spinner-right";
+      this.$store
+        .dispatch(LOGIN, { ...this.formData })
+        .then(() => this.$router.push({ name: "dashboard" }))
+        .catch(() => {
+          this.loadingClass = "";
+          if (this.errors["message"]) {
+            Swal.fire({
+              title: "Error!",
+              text: this.errors["message"],
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
+            });
+          }
+        });
+    },
   },
 };
 </script>

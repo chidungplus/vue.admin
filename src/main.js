@@ -31,7 +31,6 @@ import "@mdi/font/css/materialdesignicons.css";
 import "@/core/plugins/formvalidation";
 import InputComponent from "@/components/input/default.vue";
 Vue.component("input-component", InputComponent);
-
 // API service init
 ApiService.init();
 

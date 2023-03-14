@@ -31,7 +31,7 @@ const getters = {
 
 const actions = {
   [LOGIN](context, credentials) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ApiService.post(ROUTES.API.LOGIN, credentials)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
@@ -39,6 +39,7 @@ const actions = {
         })
         .catch(({ response }) => {
           context.commit(SET_ERROR, response.data.errors);
+          reject(response);
         });
     });
   },
@@ -46,7 +47,7 @@ const actions = {
     context.commit(PURGE_AUTH);
   },
   [REGISTER](context, credentials) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ApiService.post(ROUTES.API.REGISTER, credentials)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
@@ -54,6 +55,7 @@ const actions = {
         })
         .catch(({ response }) => {
           context.commit(SET_ERROR, response.data.errors);
+          reject(response);
         });
     });
   },
@@ -64,8 +66,9 @@ const actions = {
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
         })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+        .catch(() => {
+          context.commit(PURGE_AUTH);
+          location.href = "/#/login";
         });
     } else {
       context.commit(PURGE_AUTH);

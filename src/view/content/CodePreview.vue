@@ -173,15 +173,15 @@ export default {
      * Check if code only has one, exclude the tabs
      * @returns {boolean}
      */
-    hasSingleCodeType() {
-      let exist = 0;
-      ["html", "js", "scss"].forEach((type) => {
-        if (this.$slots.hasOwnProperty(type)) {
-          exist++;
-        }
-      });
-      return exist === 1;
-    },
+    // hasSingleCodeType() {
+    //   let exist = 0;
+    //   ["html", "js", "scss"].forEach((type) => {
+    //     if (this.$slots.hasOwnProperty(type)) {
+    //       exist++;
+    //     }
+    //   });
+    //   return exist === 1;
+    // },
 
     /**
      * Custom generate codes

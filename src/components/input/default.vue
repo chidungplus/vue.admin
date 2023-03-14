@@ -10,7 +10,7 @@
       v-bind="$attrs.bind"
     />
     <div>
-        <span v-if="errorText" class="text-danger">{{ errorText }}</span>
+      <span v-if="errorText" class="text-danger">{{ errorText }}</span>
     </div>
   </div>
 </template>
@@ -26,36 +26,36 @@ export default {
         "form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6",
     },
     labelClass: {
-        default: 'font-size-h6 font-weight-bolder text-dark'
+      default: "font-size-h6 font-weight-bolder text-dark",
     },
     value: {
       default: "",
     },
     name: {
-        default: ""
+      default: "",
     },
     placeholder: {
-        default: ""
+      default: "",
     },
     type: {
-        default: 'text'
+      default: "text",
     },
     error: {
-        default: () => {}
+      default: () => {},
     },
     label: {
-        default: ""
-    }
+      default: "",
+    },
   },
   watch: {
-      error: function (error) {
-          this.errorText = error[this.name]?.[0];
-      }
+    error: function (error) {
+      this.errorText = error[this.name]?.[0];
+    },
   },
   data() {
-      return {
-          errorText: ""
-      }
+    return {
+      errorText: "",
+    };
   },
   computed: {
     inputVal: {
@@ -63,6 +63,7 @@ export default {
         return this.value;
       },
       set(val) {
+        this.errorText = "";
         this.$emit("input", val);
       },
     },
