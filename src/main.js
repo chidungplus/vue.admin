@@ -37,7 +37,9 @@ Vue.component("input-component", InputComponent);
 Vue.component("table-component", TableComponent);
 // API service init
 ApiService.init();
+import VueMeta from 'vue-meta';
 
+Vue.use(VueMeta);
 // Remove this to disable mock API
 // MockService.init();
 

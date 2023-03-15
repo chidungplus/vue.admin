@@ -16,8 +16,8 @@ export default new Router({
           component: () => import("@/view/pages/Dashboard.vue"),
         },
         {
-          path: "/product",
-          name: "product",
+          path: "/products",
+          name: "products",
           component: () => import("@/view/pages/product/Index.vue"),
         },
         {
@@ -87,7 +87,7 @@ export default new Router({
       // the 404 route, when none of the above matches
       path: "/404",
       name: "404",
-      //   component: () => import("@/view/pages/error/Error-1.vue"),
+        component: () => import("@/view/pages/error/Error-1.vue"),
     },
   ],
 });

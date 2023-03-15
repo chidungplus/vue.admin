@@ -28,14 +28,14 @@
       }"
     >
       <a href="#" class="menu-link menu-toggle">
-        <i class="menu-icon far fa-user"></i>
+        <i class="menu-icon flaticon2-image-file"></i>
         <span class="menu-text">Product</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="menu-submenu menu-submenu-classic menu-submenu-right">
         <ul class="menu-subnav">
           <router-link
-            to="/product"
+            to="/products"
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <li
