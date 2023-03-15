@@ -25,11 +25,10 @@
           <!-- begin:: Content Head -->
 
           <!-- begin:: Content Head -->
-          <!-- <SubheaderComponent
-            v-if="subheaderDisplay"
+          <SubheaderComponent
             v-bind:breadcrumbs="breadcrumbs"
             v-bind:title="pageTitle"
-          /> -->
+          />
           <!-- end:: Content Head -->
 
           <!-- begin:: Content Body -->
@@ -61,7 +60,7 @@ import HeaderComponent from "@/view/layout/header/Header.vue";
 import HeaderMobileComponent from "@/view/layout/header/HeaderMobile.vue";
 import FooterComponent from "@/view/layout/footer/Footer.vue";
 import HtmlClass from "@/core/services/htmlclass.service";
-// import SubheaderComponent from "@/view/layout/subheader/Subheader.vue";
+import SubheaderComponent from "@/view/layout/subheader/Subheader.vue";
 // import StickyToolbarComponent from "@/view/layout/extras/StickyToolbar.vue";
 import ScrollTopComponent from "@/view/layout/extras/ScrollTop";
 // <!-- import Loader from "@/view/content/Loader.vue"; -->
@@ -77,7 +76,7 @@ export default {
     HeaderComponent,
     HeaderMobileComponent,
     FooterComponent,
-    // SubheaderComponent,
+    SubheaderComponent,
     // StickyToolbarComponent,
     ScrollTopComponent,
     // Loader,
@@ -149,14 +148,6 @@ export default {
     toolbarDisplay() {
       // return !!this.layoutConfig("toolbar.display");
       return true;
-    },
-
-    /**
-     * Set the subheader display
-     * @returns {boolean}
-     */
-    subheaderDisplay() {
-      return !!this.layoutConfig("subheader.display");
     },
   },
 };

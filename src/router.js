@@ -16,6 +16,11 @@ export default new Router({
           component: () => import("@/view/pages/Dashboard.vue"),
         },
         {
+          path: "/product",
+          name: "product",
+          component: () => import("@/view/pages/product/Index.vue"),
+        },
+        {
           path: "/builder",
           name: "builder",
           //   component: () => import("@/view/pages/Builder.vue"),

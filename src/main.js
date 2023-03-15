@@ -6,7 +6,7 @@ import ApiService from "@/core/services/api.service";
 // import MockService from "@/core/mock/mock.service";
 import { VERIFY_AUTH } from "@/core/services/store/auth.module";
 // import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
-
+import Fragment from "vue-fragment";
 Vue.config.productionTip = false;
 
 // Global 3rd party plugins
@@ -29,8 +29,12 @@ import "@/core/plugins/treeselect";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/core/plugins/formvalidation";
+Vue.use(Fragment.Plugin);
+
 import InputComponent from "@/components/input/default.vue";
+import TableComponent from "@/components/table/default.vue";
 Vue.component("input-component", InputComponent);
+Vue.component("table-component", TableComponent);
 // API service init
 ApiService.init();
 
