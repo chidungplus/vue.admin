@@ -61,7 +61,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "dashboard",
   metaInfo: {
-      title: "Dashboard"
+    title: "Dashboard",
   },
   components: {
     AdvancedTableWidget2,

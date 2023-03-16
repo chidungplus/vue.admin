@@ -39,7 +39,12 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-        <a href="#" class="btn btn-light font-weight-bold btn-sm"> Actions </a>
+        <router-link
+          :to="`${routeRedirect}`"
+          class="btn btn-light font-weight-bold btn-sm"
+        >
+          Actions
+        </router-link>
 
         <b-dropdown
           size="sm"
@@ -167,12 +172,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-
 export default {
   name: "KTSubheader",
   props: {
     breadcrumbs: Array,
     title: String,
+    routeRedirect: String,
   },
   computed: {
     ...mapGetters(["layoutConfig"]),

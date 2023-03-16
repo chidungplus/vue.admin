@@ -32,12 +32,14 @@ import "@/core/plugins/formvalidation";
 Vue.use(Fragment.Plugin);
 
 import InputComponent from "@/components/input/default.vue";
+import SelectComponent from "@/components/select/default.vue";
 import TableComponent from "@/components/table/default.vue";
 Vue.component("input-component", InputComponent);
+Vue.component("select-component", SelectComponent);
 Vue.component("table-component", TableComponent);
 // API service init
 ApiService.init();
-import VueMeta from 'vue-meta';
+import VueMeta from "vue-meta";
 
 Vue.use(VueMeta);
 // Remove this to disable mock API

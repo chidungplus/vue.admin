@@ -30,6 +30,13 @@ export default {
         return last.title;
       }
     },
+
+    routeRedirect(state) {
+      let last = state.breadcrumbs[state.breadcrumbs.length - 1];
+      if (last && last.routeRedirect) {
+        return last.routeRedirect;
+      }
+    },
   },
   actions: {
     /**

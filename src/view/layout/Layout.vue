@@ -28,6 +28,7 @@
           <SubheaderComponent
             v-bind:breadcrumbs="breadcrumbs"
             v-bind:title="pageTitle"
+            v-bind:routeRedirect="routeRedirect"
           />
           <!-- end:: Content Head -->
 
@@ -107,6 +108,7 @@ export default {
       "breadcrumbs",
       "pageTitle",
       "layoutConfig",
+      "routeRedirect",
     ]),
 
     /**

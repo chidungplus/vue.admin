@@ -9,29 +9,13 @@
         <span class="text-muted font-weight-bold mr-2">
           2023 &nbsp;&copy;&nbsp;
         </span>
-        <a
-          href="#"
-          target=""
-          class="text-dark-75 text-hover-primary"
-        >
+        <a href="#" target="" class="text-dark-75 text-hover-primary">
           Admin
         </a>
       </div>
       <div class="nav nav-dark">
-        <a
-          href="#"
-          target="_blank"
-          class="nav-link pr-3 pl-0"
-        >
-          About
-        </a>
-        <a
-          href="#"
-          target="_blank"
-          class="nav-link px-3"
-        >
-          Team
-        </a>
+        <a href="#" target="_blank" class="nav-link pr-3 pl-0"> About </a>
+        <a href="#" target="_blank" class="nav-link px-3"> Team </a>
         <a
           href="https://www.facebook.com/hahuyphat.cris/"
           target="_blank"
