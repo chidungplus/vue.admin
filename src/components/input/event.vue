@@ -1,17 +1,16 @@
 <template>
   <div :class="parentClass">
     <label :class="labelClass" v-if="label">{{ label }}</label>
+    <input
+      :class="classInput"
+      :type="type"
+      :placeholder="placeholder"
+      :name="name"
+      :value="value[index]"
+      @change="handleChangeInput"
+    />
     <div>
-        <textarea
-          :class="classInput"
-          :placeholder="placeholder"
-          :name="name"
-          v-model="inputVal"
-          :disabled="disable"
-        > </textarea>
-        <div>
-          <span v-if="errorText" class="text-danger">{{ errorText }}</span>
-        </div>
+      <span v-if="errorText" class="text-danger">{{ errorText }}</span>
     </div>
   </div>
 </template>
@@ -30,7 +29,7 @@ export default {
       default: "font-size-h6 font-weight-bolder text-dark",
     },
     value: {
-      default: "",
+      default: [],
     },
     name: {
       default: "",
@@ -47,9 +46,9 @@ export default {
     label: {
       default: "",
     },
-    disable: {
-        default: false
-    }
+    index: {
+      default: Number,
+    },
   },
   watch: {
     error: function (error) {
@@ -61,15 +60,14 @@ export default {
       errorText: "",
     };
   },
-  computed: {
-    inputVal: {
-      get() {
-        return this.value;
-      },
-      set(val) {
-        this.errorText = "";
-        this.$emit("input", val);
-      },
+  methods: {
+    handleChangeInput(e) {
+      const { name, value } = e.target;
+      this.$emit("inputEvent", {
+        name,
+        value,
+        index: this.index,
+      });
     },
   },
 };

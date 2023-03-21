@@ -1,5 +1,8 @@
 <template>
-  <SectionForm />
+  <SectionForm 
+    :formData="formData"
+    @onChangeInput="onChangeInput"
+  />
 </template>
 
 <script>
@@ -8,6 +11,21 @@ export default {
   components: {
     SectionForm,
   },
+  data() {
+      return {
+          formData: {
+              name: "",
+              content: "",
+              code: "",
+              category_id: "",
+          }
+      }
+  },
+  methods: {
+      onChangeInput({ value, field }) {
+          this.formData[field] = value;
+      }
+  }
 };
 </script>
 

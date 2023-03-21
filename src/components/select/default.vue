@@ -37,7 +37,7 @@ export default {
       default: "",
     },
     options: {
-        default: () => []
+      default: () => [],
     },
     error: {
       default: () => {},

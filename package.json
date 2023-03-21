@@ -10,6 +10,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@johmun/vue-tags-input": "^2.1.0",
     "@mdi/font": "^3.6.95",
     "@popperjs/core": "^2.4.0",
     "@riophae/vue-treeselect": "^0.4.0",
