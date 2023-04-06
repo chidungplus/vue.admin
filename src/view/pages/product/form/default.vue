@@ -77,7 +77,6 @@
               <tr v-for="(td, idx) in tds" :key="idx">
                 <td>
                   <div class="d-flex">
-                    <b-checkbox></b-checkbox>
                     <span>{{ td }}</span>
                   </div>
                 </td>
@@ -85,22 +84,25 @@
                   <input-event-component
                     :index="idx"
                     classInput="form-control form-control-solid h-auto py-2 px-6"
+                    name="sku"
                     :value="[]"
-                    @inputEvent="onInputValue($event, 'name')"
+                    @inputEvent="onInputValue($event, 'sku')"
                   />
                 </td>
                 <td>
                   <input-event-component
                     :index="idx"
                     classInput="form-control form-control-solid h-auto py-2 px-6"
-                    :value="[]"
+                    name="bar_code"
                     @inputEvent="onInputValue($event, 'bar_code')"
+                    :value="[]"
                   />
                 </td>
                 <td>
                   <input-event-component
                     :index="idx"
                     classInput="form-control form-control-solid h-auto py-2 px-6"
+                    name="cost"
                     :value="[]"
                     @inputEvent="onInputValue($event, 'cost')"
                   />
@@ -108,22 +110,18 @@
                 <td>
                   <input-event-component
                     :index="idx"
-                    classInput="form-control form-control-solid h-auto py-2 px-6"
                     :value="[]"
+                    classInput="form-control form-control-solid h-auto py-2 px-6"
+                    name="price"
                     @inputEvent="onInputValue($event, 'price')"
-                  />
-                </td>
-                <td>
-                  <input-event-component
-                    :index="idx"
-                    classInput="form-control form-control-solid h-auto py-2 px-6"
-                    :value="[]"
-                    @inputEvent="onInputValue($event, 'price_recent')"
                   />
                 </td>
               </tr>
             </tbody>
           </table>
+          <div>
+              <button type="button" class="btn mr-3 btn-success" @click="onSave">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -139,21 +137,21 @@ export default {
   components: {
     VueTagsInput,
   },
-//   props: {
-//       formData: {
-//           default: {}
-//       }
-//   },
+  props: {
+      formData: {
+          default: {}
+      }
+  },
   data() {
     return {
       categories: [],
-      ths: ["name", "sku", "barcode", "price", "cost", "price rent"],
+      ths: ["code", "sku", "barcode", "price", "cost"],
       tds: [],
       sizes: [],
       size: "",
       colors: [],
       color: "",
-      
+      productItems: []
     };
   },
   watch: {
@@ -177,17 +175,33 @@ export default {
       }
     },
     setValue() {
-      let data = [];
-      for (let index = 0; index < this.colors.length; index++) {
-        for (let j = 0; j < this.sizes.length; j++) {
-          data.push(`- ${this.colors[index].text} - ${this.sizes[j].text}`);
+        let data = [];
+        this.productItems = [];
+        for (let index = 0; index < this.colors.length; index++) {
+            for (let j = 0; j < this.sizes.length; j++) {
+                data.push(`- ${this.colors[index].text} - ${this.sizes[j].text}`);
+                this.productItems.push({
+                    name: this.colors[index].text,
+                    sku: "",
+                    bar_code: "",
+                    price: "",
+                    cost: "",
+                });
+            }
         }
-      }
 
-      return data;
+        return data;
     },
-    onInputValue(value, field) {
-        this.$emit("onChangeInput", {value, field});
+    onInputValue(data, field) {
+        console.log(data);
+        if (Object.keys(data).includes('index')) {
+            const {index, value} = data;
+            this.productItems[index][field] = value;
+        }
+        this.$emit("onChangeInput", {value: data, field});
+    },
+    onSave() {
+        this.$emit('onSave', this.productItems);
     }
   },
 };
