@@ -19,9 +19,9 @@
             />
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
-              label="Code"
-              name='code'
-              @input="onInputValue($event, 'code')"
+              label="Product code"
+              name='product_code'
+              @input="onInputValue($event, 'product_code')"
             />
             <select-component
               classSelect="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
@@ -193,12 +193,12 @@ export default {
         return data;
     },
     onInputValue(data, field) {
-        console.log(data);
         if (Object.keys(data).includes('index')) {
             const {index, value} = data;
             this.productItems[index][field] = value;
+        }else {
+            this.$emit("onChangeInput", {value: data, field});
         }
-        this.$emit("onChangeInput", {value: data, field});
     },
     onSave() {
         this.$emit('onSave', this.productItems);
