@@ -14,38 +14,44 @@
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Name"
-              name='name'
+              name="name"
+              :value="formData.name"
               @input="onInputValue($event, 'name')"
             />
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Product code"
-              name='product_code'
+              name="product_code"
+              :value="formData.product_code"
               @input="onInputValue($event, 'product_code')"
             />
             <select-component
               classSelect="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Category"
               :options="categories"
-              name='category_id'
+              name="category_id"
+              :value="formData.category_id"
               @input="onInputValue($event, 'category_id')"
             />
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Price"
-              name='price'
+              name="price"
+              :value="formData.price"
               @input="onInputValue($event, 'price')"
             />
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Cost"
-              name='cost'
+              name="cost"
+              :value="formData.cost"
               @input="onInputValue($event, 'cost')"
             />
             <textarea-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Content"
-              name='content'
+              name="content"
+              :value="formData.content"
               @input="onInputValue($event, 'content')"
             />
             <div class="form-group">
@@ -83,19 +89,10 @@
                 <td>
                   <input-event-component
                     :index="idx"
+                    :value="productItems"
                     classInput="form-control form-control-solid h-auto py-2 px-6"
-                    name="sku"
-                    :value="[]"
-                    @inputEvent="onInputValue($event, 'sku')"
-                  />
-                </td>
-                <td>
-                  <input-event-component
-                    :index="idx"
-                    classInput="form-control form-control-solid h-auto py-2 px-6"
-                    name="bar_code"
-                    @inputEvent="onInputValue($event, 'bar_code')"
-                    :value="[]"
+                    name="price"
+                    @inputEvent="onInputValue($event, 'price')"
                   />
                 </td>
                 <td>
@@ -103,24 +100,17 @@
                     :index="idx"
                     classInput="form-control form-control-solid h-auto py-2 px-6"
                     name="cost"
-                    :value="[]"
+                    :value="productItems"
                     @inputEvent="onInputValue($event, 'cost')"
-                  />
-                </td>
-                <td>
-                  <input-event-component
-                    :index="idx"
-                    :value="[]"
-                    classInput="form-control form-control-solid h-auto py-2 px-6"
-                    name="price"
-                    @inputEvent="onInputValue($event, 'price')"
                   />
                 </td>
               </tr>
             </tbody>
           </table>
           <div>
-              <button type="button" class="btn mr-3 btn-success" @click="onSave">Save</button>
+            <button type="button" class="btn mr-3 btn-success" @click="onSave">
+              Save
+            </button>
           </div>
         </div>
       </div>
@@ -138,20 +128,20 @@ export default {
     VueTagsInput,
   },
   props: {
-      formData: {
-          default: {}
-      }
+    formData: {
+      default: {},
+    },
   },
   data() {
     return {
       categories: [],
-      ths: ["code", "sku", "barcode", "price", "cost"],
+      ths: ["code", "price", "cost"],
       tds: [],
       sizes: [],
       size: "",
       colors: [],
       color: "",
-      productItems: []
+      productItems: [],
     };
   },
   watch: {
@@ -175,34 +165,40 @@ export default {
       }
     },
     setValue() {
-        let data = [];
-        this.productItems = [];
-        for (let index = 0; index < this.colors.length; index++) {
-            for (let j = 0; j < this.sizes.length; j++) {
-                data.push(`- ${this.colors[index].text} - ${this.sizes[j].text}`);
-                this.productItems.push({
-                    name: this.colors[index].text,
-                    sku: "",
-                    bar_code: "",
-                    price: "",
-                    cost: "",
-                });
-            }
+      let data = [];
+      this.productItems = [];
+      for (let index = 0; index < this.colors.length; index++) {
+        for (let j = 0; j < this.sizes.length; j++) {
+          data.push(`${this.colors[index].text} - ${this.sizes[j].text}`);
+          this.productItems.push({
+            name: this.colors[index].text,
+            price: this.formData.price,
+            cost: this.formData.cost,
+          });
         }
+      }
 
-        return data;
+      return data;
     },
+
     onInputValue(data, field) {
-        if (Object.keys(data).includes('index')) {
-            const {index, value} = data;
-            this.productItems[index][field] = value;
-        }else {
-            this.$emit("onChangeInput", {value: data, field});
+      if (Object.keys(data).includes("index")) {
+        const { index, value } = data;
+        this.productItems[index][field] = value;
+      } else {
+        this.$emit("onChangeInput", { value: data, field });
+        const fields = ['price', 'cost'];
+        if (fields.includes(field)) {
+            this.productItems.forEach(productItem => {
+                productItem.price = this.formData.price;
+                productItem.cost = this.formData.cost;
+            });
         }
+      }
     },
     onSave() {
-        this.$emit('onSave', this.productItems);
-    }
+      this.$emit("onSave", this.productItems);
+    },
   },
 };
 </script>

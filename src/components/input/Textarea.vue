@@ -2,16 +2,17 @@
   <div :class="parentClass">
     <label :class="labelClass" v-if="label">{{ label }}</label>
     <div>
-        <textarea
-          :class="classInput"
-          :placeholder="placeholder"
-          :name="name"
-          v-model="inputVal"
-          :disabled="disable"
-        > </textarea>
-        <div>
-          <span v-if="errorText" class="text-danger">{{ errorText }}</span>
-        </div>
+      <textarea
+        :class="classInput"
+        :placeholder="placeholder"
+        :name="name"
+        v-model="inputVal"
+        :disabled="disable"
+      >
+      </textarea>
+      <div>
+        <span v-if="errorText" class="text-danger">{{ errorText }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -48,8 +49,8 @@ export default {
       default: "",
     },
     disable: {
-        default: false
-    }
+      default: false,
+    },
   },
   watch: {
     error: function (error) {

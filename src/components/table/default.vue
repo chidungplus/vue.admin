@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     handleColumn(item, column) {
-      return item[column.dataIndex];
+      return column.render ? column.render(item) : item[column.dataIndex];
     },
   },
 };

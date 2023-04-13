@@ -18,10 +18,10 @@ export default new Router({
         {
           path: "/products",
           name: "products",
-          component: () => import("@/view/pages/product/Create.vue"),
+          component: () => import("@/view/pages/product/Index.vue"),
           children: [
             {
-              path: "create",
+              path: "/create",
               name: "productCreate",
               component: () => import("@/view/pages/product/Create.vue"),
             },

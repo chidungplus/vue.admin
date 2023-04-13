@@ -6,7 +6,7 @@
       :type="type"
       :placeholder="placeholder"
       :name="name"
-      :value="value[index]"
+      :value="value[index][name]"
       @change="handleChangeInput"
     />
     <div>

@@ -45,15 +45,34 @@ export default {
     formatColumn() {
       this.columns = [
         {
+          title: "Image",
+          dataIndex: "image",
+        },
+        {
           title: "Title",
           dataIndex: "name",
         },
         {
-          title: "Content",
-          dataIndex: "content",
+          title: "Category",
+          dataIndex: "category_id",
+          render: (item) => item?.category?.name || ""
+        },
+        {
+          title: "Quantity total",
+          dataIndex: "quantity",
+          render: (product) => this.setQuantity(product)
+        },
+        {
+          title: "Date created",
+          dataIndex: "created_at",
         },
       ];
     },
+    setQuantity(product) {
+        return product.product_items.reduce((accumulator, item) => {
+            return parseInt(accumulator) + parseInt(item?.quantity);
+        }, 0);
+    }
   },
 };
 </script>
