@@ -11,6 +11,8 @@ import SectionForm from "@/view/pages/product/form/default.vue";
 import ApiService from "@/core/services/api.service.js";
 import { ROUTES } from "@/core/config/routes/index.js";
 import { generateRandomString } from "@/core/helper/String.js";
+import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
+import { appendFormData } from '@/core/helper/File.js';
 export default {
   components: {
     SectionForm,
@@ -22,8 +24,19 @@ export default {
         content: "",
         product_code: "",
         category_id: "",
+        thumbnail: null,
+        thumbnail_id: ""
       },
     };
+  },
+  mounted() {
+    this.$store.dispatch(SET_BREADCRUMB, [
+      {
+        title: "Product create",
+        route: "products",
+        routeRedirect: "products",
+      },
+    ]);
   },
   methods: {
     onChangeInput({ value, field }) {
@@ -39,7 +52,7 @@ export default {
           ...this.formData,
           productItems,
         };
-        const data = await ApiService.post(ROUTES.API.PRODUCT_CREATE, payloads);
+        const data = await ApiService.post(ROUTES.API.PRODUCT_CREATE, appendFormData(payloads));
         console.log(data);
       } catch (error) {
         console.log(error);

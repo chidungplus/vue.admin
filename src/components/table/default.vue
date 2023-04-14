@@ -23,7 +23,10 @@
                         v-for="column in columns"
                         :key="`${column.dataIndex}${index}`"
                       >
-                        <fragment>
+                        <fragment v-if="column.dataIndex == 'image'">
+                            <img :src="handleColumn(item, column)" alt="" style="width: 40px; height: 40px;">
+                        </fragment>
+                        <fragment v-else>
                           {{ handleColumn(item, column) }}
                         </fragment>
                       </td>

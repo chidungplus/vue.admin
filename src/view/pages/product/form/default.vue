@@ -11,6 +11,13 @@
         </div>
         <div class="card-body">
           <div>
+            <upload-image-component
+              classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
+              label="Image"
+              name="thumbnail_id"
+              :value="formData.thumbnail"
+              @input="onInputValue($event, 'thumbnail')"
+            />
             <input-component
               classInput="form-control form-control-solid h-auto py-2 px-6 rounded-lg font-size-h6 col-md-3"
               label="Name"

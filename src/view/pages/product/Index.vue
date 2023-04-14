@@ -25,7 +25,7 @@ export default {
       {
         title: "Product list",
         route: "products",
-        routeRedirect: "/products/create",
+        routeRedirect: "productCreate",
       },
     ]);
   },
@@ -47,6 +47,7 @@ export default {
         {
           title: "Image",
           dataIndex: "image",
+          render: (item) => item?.thumbnail?.path || ""
         },
         {
           title: "Title",
@@ -60,7 +61,14 @@ export default {
         {
           title: "Quantity total",
           dataIndex: "quantity",
-          render: (product) => this.setQuantity(product)
+          render: (product) =>
+            `${product?.product_items_sum_quantity || 0} (${
+              product?.product_items_count
+            } Biến thể)`,
+        },
+        {
+          title: "Status",
+          dataIndex: "status",
         },
         {
           title: "Date created",
@@ -68,11 +76,6 @@ export default {
         },
       ];
     },
-    setQuantity(product) {
-        return product.product_items.reduce((accumulator, item) => {
-            return parseInt(accumulator) + parseInt(item?.quantity);
-        }, 0);
-    }
   },
 };
 </script>
