@@ -40,7 +40,7 @@
       </div>
       <div class="d-flex align-items-center">
         <router-link
-          :to="{name:`${routeRedirect}`}"
+          :to="{ name: `${routeRedirect}` }"
           class="btn btn-light font-weight-bold btn-sm"
         >
           Actions

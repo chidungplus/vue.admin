@@ -12,7 +12,7 @@ import ApiService from "@/core/services/api.service.js";
 import { ROUTES } from "@/core/config/routes/index.js";
 import { generateRandomString } from "@/core/helper/String.js";
 import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
-import { appendFormData } from '@/core/helper/File.js';
+import { appendFormData } from "@/core/helper/File.js";
 export default {
   components: {
     SectionForm,
@@ -25,7 +25,7 @@ export default {
         product_code: "",
         category_id: "",
         thumbnail: null,
-        thumbnail_id: ""
+        thumbnail_id: "",
       },
     };
   },
@@ -45,15 +45,23 @@ export default {
     async onSave(productItems) {
       try {
         productItems.forEach((productItem) => {
+          productItem.name = "";
           productItem.name = this.formData.name + "-" + productItem.name;
         });
-        this.formData["permalink"] = `${this.formData.name}.${generateRandomString()}`;
+        this.formData["permalink"] = `${
+          this.formData.name
+        }.${generateRandomString()}`;
         const payloads = {
           ...this.formData,
           productItems,
         };
-        const data = await ApiService.post(ROUTES.API.PRODUCT_CREATE, appendFormData(payloads));
-        console.log(data);
+        const { data } = await ApiService.post(
+          ROUTES.API.PRODUCT_CREATE,
+          appendFormData(payloads)
+        );
+        if (data.status) {
+          this.$router.push({ name: "products" });
+        }
       } catch (error) {
         console.log(error);
       }

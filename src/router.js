@@ -19,21 +19,11 @@ export default new Router({
           path: "/products",
           name: "products",
           component: () => import("@/view/pages/product/Index.vue"),
-        //   children: [
-        //     {
-              
-        //     },
-        //   ],
         },
         {
           path: "/products/create",
           name: "productCreate",
           component: () => import("@/view/pages/product/Create.vue"),
-        //   children: [
-        //     {
-              
-        //     },
-        //   ],
         },
         {
           path: "/builder",

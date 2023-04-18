@@ -1,6 +1,11 @@
 <template>
   <div>
-    <table-component :dataProp="dataTable" :columns="columns" />
+    <table-component
+      @onChangePage="onChangePage"
+      @onChangePerPage="onChangePerPage"
+      :dataProp="dataTable"
+      :columns="columns"
+    />
   </div>
 </template>
 
@@ -34,20 +39,33 @@ export default {
     this.formatColumn();
   },
   methods: {
-    async onSearch() {
+    async onSearch(page = 1) {
       try {
-        const { data } = await ApiService.get(ROUTES.API.PRODUCT_SEARCH);
+        const payload = {
+          page,
+        };
+        const { data } = await ApiService.post(
+          ROUTES.API.PRODUCT_SEARCH,
+          payload
+        );
         this.dataTable = data;
       } catch (error) {
         console.log(error);
       }
+    },
+    onChangePage(page) {
+      this.onSearch(page);
+    },
+    onChangePerPage(perPage) {
+      this.onSearch(perPage);
     },
     formatColumn() {
       this.columns = [
         {
           title: "Image",
           dataIndex: "image",
-          render: (item) => item?.thumbnail?.path || ""
+          render: (item) =>
+            `${process.env.VUE_APP_ROOT_API}/${item?.thumbnail?.path}` || "",
         },
         {
           title: "Title",
@@ -56,7 +74,7 @@ export default {
         {
           title: "Category",
           dataIndex: "category_id",
-          render: (item) => item?.category?.name || ""
+          render: (item) => item?.category?.name || "",
         },
         {
           title: "Quantity total",

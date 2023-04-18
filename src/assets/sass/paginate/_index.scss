@@ -1,0 +1,12 @@
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.42rem;
+    .page-item {
+        padding: 10px;
+        border: 1px solid gray;
+        margin: 3px;
+        border-radius: 2px;
+    }
+}

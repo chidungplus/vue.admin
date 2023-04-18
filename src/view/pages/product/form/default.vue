@@ -194,12 +194,12 @@ export default {
         this.productItems[index][field] = value;
       } else {
         this.$emit("onChangeInput", { value: data, field });
-        const fields = ['price', 'cost'];
+        const fields = ["price", "cost"];
         if (fields.includes(field)) {
-            this.productItems.forEach(productItem => {
-                productItem.price = this.formData.price;
-                productItem.cost = this.formData.cost;
-            });
+          this.productItems.forEach((productItem) => {
+            productItem.price = this.formData.price;
+            productItem.cost = this.formData.cost;
+          });
         }
       }
     },

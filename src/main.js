@@ -6,6 +6,7 @@ import ApiService from "@/core/services/api.service";
 // import MockService from "@/core/mock/mock.service";
 import { VERIFY_AUTH } from "@/core/services/store/auth.module";
 // import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
+import Paginate from "vuejs-paginate";
 import Fragment from "vue-fragment";
 Vue.config.productionTip = false;
 
@@ -43,6 +44,8 @@ Vue.component("select-component", SelectComponent);
 Vue.component("table-component", TableComponent);
 Vue.component("textarea-component", TextAreaComponent);
 Vue.component("upload-image-component", UploadImage);
+Vue.component("paginate", Paginate);
+
 // API service init
 ApiService.init();
 import VueMeta from "vue-meta";
