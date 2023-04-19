@@ -39,10 +39,11 @@ export default {
     this.formatColumn();
   },
   methods: {
-    async onSearch(page = 1) {
+    async onSearch(page = 1, perPage = localStorage.getItem("perPage") || 10) {
       try {
         const payload = {
           page,
+          perPage,
         };
         const { data } = await ApiService.post(
           ROUTES.API.PRODUCT_SEARCH,
@@ -57,7 +58,7 @@ export default {
       this.onSearch(page);
     },
     onChangePerPage(perPage) {
-      this.onSearch(perPage);
+      this.onSearch(1, perPage);
     },
     formatColumn() {
       this.columns = [

@@ -89,6 +89,27 @@
             <tbody>
               <tr v-for="(td, idx) in tds" :key="idx">
                 <td>
+                  <b-button v-b-modal="'my-modal'">Show Modal</b-button>
+                  <b-modal id="my-modal" hide-footer>
+                    <GalleryModal @onChangeFile="onChangeFile" />
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-light-primary font-weight-bold"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary font-weight-bold"
+                        @click="onSaveImage"
+                      >
+                        Save changes
+                      </button>
+                    </div>
+                  </b-modal>
+                </td>
+                <td>
                   <div class="d-flex">
                     <span>{{ td }}</span>
                   </div>
@@ -129,10 +150,12 @@
 import ApiService from "@/core/services/api.service.js";
 import { ROUTES } from "@/core/config/routes/index.js";
 import VueTagsInput from "@johmun/vue-tags-input";
-
+import GalleryModal from "@/view/pages/product/modal/GalleryModal.vue";
+import { appendFormData } from "@/core/helper/File.js";
 export default {
   components: {
     VueTagsInput,
+    GalleryModal,
   },
   props: {
     formData: {
@@ -149,6 +172,10 @@ export default {
       colors: [],
       color: "",
       productItems: [],
+      formDataGallery: {
+        path: "",
+        files: [],
+      },
     };
   },
   watch: {
@@ -205,6 +232,22 @@ export default {
     },
     onSave() {
       this.$emit("onSave", this.productItems);
+    },
+    onChangeFile(data) {
+      const { name, files } = data;
+      this.formDataGallery.path = name;
+      this.formDataGallery.files = files;
+    },
+    onSaveImage() {
+      try {
+        const { data } = ApiService.post(
+          "/test",
+          appendFormData(this.formDataGallery)
+        );
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

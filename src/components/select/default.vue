@@ -2,7 +2,7 @@
   <div :class="parentClass">
     <label :class="labelClass" v-if="label">{{ label }}</label>
     <select :name="name" :class="classSelect" v-model="inputVal">
-      <option value=""></option>
+      <option value="" v-show="!isRequire"></option>
       <option
         :value="option.id"
         v-for="(option, index) in options"
@@ -44,6 +44,9 @@ export default {
     },
     label: {
       default: "",
+    },
+    isRequire: {
+      default: false,
     },
   },
   watch: {

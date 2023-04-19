@@ -38,12 +38,14 @@ import TextAreaComponent from "@/components/input/Textarea.vue";
 import SelectComponent from "@/components/select/default.vue";
 import TableComponent from "@/components/table/default.vue";
 import UploadImage from "@/components/input/UploadImage.vue";
+import UploadMultiImage from "@/components/input/UploadMultipleImage.vue";
 Vue.component("input-component", InputComponent);
 Vue.component("input-event-component", InputEventComponent);
 Vue.component("select-component", SelectComponent);
 Vue.component("table-component", TableComponent);
 Vue.component("textarea-component", TextAreaComponent);
 Vue.component("upload-image-component", UploadImage);
+Vue.component("upload-multi-image-component", UploadMultiImage);
 Vue.component("paginate", Paginate);
 
 // API service init

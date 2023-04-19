@@ -47,6 +47,8 @@
                 parentClass="form-group mr-3"
                 classSelect="form-control form-control-solid"
                 :options="options"
+                :value="cptPerPage"
+                :isRequire="true"
                 @input="onChangePerPage($event)"
               />
               <paginate
@@ -76,8 +78,10 @@ export default {
     columns: {
       default: [],
     },
-    perPageProp: {
-      default: 10,
+  },
+  computed: {
+    cptPerPage() {
+      return localStorage.getItem("perPage") || this.perPage;
     },
   },
   data() {
@@ -86,7 +90,7 @@ export default {
       config: {
         currentPage: 1,
       },
-      perPage: "",
+      perPage: 10,
       options: [
         {
           id: 10,
@@ -105,7 +109,6 @@ export default {
   },
   created() {
     this.dataTable = this.dataProp;
-    this.perPage = this.perPageProp;
   },
   watch: {
     dataProp: function (newVal) {
@@ -120,6 +123,7 @@ export default {
       this.$emit("onChangePage", page);
     },
     onChangePerPage(e) {
+      localStorage.setItem("perPage", e);
       this.$emit("onChangePerPage", e);
     },
   },
