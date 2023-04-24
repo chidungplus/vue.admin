@@ -151,7 +151,7 @@ import ApiService from "@/core/services/api.service.js";
 import { ROUTES } from "@/core/config/routes/index.js";
 import VueTagsInput from "@johmun/vue-tags-input";
 import GalleryModal from "@/view/pages/product/modal/GalleryModal.vue";
-import { appendFormData } from "@/core/helper/File.js";
+// import { appendFormData } from "@/core/helper/File.js";
 export default {
   components: {
     VueTagsInput,
@@ -238,11 +238,15 @@ export default {
       this.formDataGallery.path = name;
       this.formDataGallery.files = files;
     },
-    onSaveImage() {
+    async onSaveImage() {
       try {
-        const { data } = ApiService.post(
-          "/test",
-          appendFormData(this.formDataGallery)
+        let formData = new FormData();
+        for (let i = 0; i < this.formDataGallery.files.length; i++) {
+          formData.append("files[" + i + "]", this.formDataGallery.files[i]);
+        }
+        const { data } = await ApiService.post(
+          ROUTES.API.UPLOAD_MULTIPLE_IMAGE,
+          formData
         );
         console.log(data);
       } catch (error) {
